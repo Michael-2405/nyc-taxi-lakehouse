@@ -11,8 +11,11 @@ class AppSettings(BaseModel):
     name: str
     environment: str
     log_level: str
-    timezone: pendulum.tz.timezone.Timezone
+    timezone: str
 
+    @property
+    def tz(self) -> pendulum.Timezone:
+        return pendulum.timezone(self.timezone)
 
 class LoggingSettings(BaseModel):
     directory: Path
@@ -22,6 +25,8 @@ class LoggingSettings(BaseModel):
 
 class HttpSettings(BaseModel):
     timeout: int
+    max_retries: int
+    user_agent: str
 
 
 class MinioSettings(BaseModel):
@@ -49,6 +54,8 @@ class Environment(BaseSettings):
     LOG_BACKUP_COUNT: int
 
     HTTP_TIMEOUT: int
+    HTTP_MAX_RETRIES: int
+    HTTP_USER_AGENT: str
 
     MINIO_ENDPOINT: str
     MINIO_ACCESS_KEY: str
@@ -67,7 +74,7 @@ class Settings:
             name=_env.APP_NAME,
             environment=_env.APP_ENV,
             log_level=_env.APP_LOG_LEVEL,
-            timezone=pendulum.timezone(_env.APP_TIMEZONE),
+            timezone=_env.APP_TIMEZONE,
         )
 
         self.logging = LoggingSettings(
@@ -78,6 +85,8 @@ class Settings:
 
         self.http = HttpSettings(
             timeout=_env.HTTP_TIMEOUT,
+            max_retries=_env.HTTP_MAX_RETRIES,
+            user_agent=_env.HTTP_USER_AGENT
         )
 
         self.minio = MinioSettings(
