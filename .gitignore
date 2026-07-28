@@ -6,3 +6,6 @@ __pycache__/
 .vscode/
 minio-data/
 data/
+airflow-logs/
+plugins/
+config/
