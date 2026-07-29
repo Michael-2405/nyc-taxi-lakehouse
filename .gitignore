@@ -9,3 +9,4 @@ data/
 airflow-logs/
 plugins/
 config/
+.ipynb_checkpoints/

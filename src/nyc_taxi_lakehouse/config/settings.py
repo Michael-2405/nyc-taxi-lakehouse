@@ -39,6 +39,7 @@ class MinioSettings(BaseModel):
     bronze_prefix: str
     silver_prefix: str
     gold_prefix: str
+    reference_prefix: str
     log_bucket: str
 
 
@@ -75,6 +76,7 @@ class Environment(BaseSettings):
     MINIO_BRONZE_PREFIX: str
     MINIO_SILVER_PREFIX: str
     MINIO_GOLD_PREFIX: str
+    MINIO_REFERENCE_PREFIX: str
     MINIO_LOG_BUCKET: str
 
 
@@ -112,6 +114,7 @@ class Settings:
             bronze_prefix=_env.MINIO_BRONZE_PREFIX,
             silver_prefix=_env.MINIO_SILVER_PREFIX,
             gold_prefix=_env.MINIO_GOLD_PREFIX,
+            reference_prefix=_env.MINIO_REFERENCE_PREFIX,
             log_bucket=_env.MINIO_LOG_BUCKET,
         )
 
