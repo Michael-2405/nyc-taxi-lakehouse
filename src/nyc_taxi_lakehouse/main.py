@@ -1,5 +1,4 @@
 from pathlib import Path
-from sys import exception
 
 import structlog
 
@@ -27,7 +26,11 @@ def main() -> None:
     file = downloader.download(dataset, Path("data/downloads"))
 
     try:
-      uploader.upload(file_path=file, bucket_name=settings.minio.raw_bucket, object_name=dataset.object_name)
+      uploader.upload(
+        file_path=file,
+        bucket_name=settings.minio.bucket_name,
+        object_name=f"{settings.minio.raw_prefix}/{dataset.object_name}"
+      )
 
     except Exception:
       logger.error("Upload failed, keeping local file for retry", file_path=str(file))

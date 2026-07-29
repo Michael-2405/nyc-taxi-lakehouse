@@ -12,8 +12,8 @@ class StorageClient:
     def __init__(self) -> None:
         self._client = Minio(
             endpoint=settings.minio.endpoint,
-            access_key=settings.minio.access_key,
-            secret_key=settings.minio.secret_key,
+            access_key=settings.minio.root_user,
+            secret_key=settings.minio.root_password,
             secure=settings.minio.secure,
         )
 

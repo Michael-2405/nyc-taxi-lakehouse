@@ -31,11 +31,16 @@ class HttpSettings(BaseModel):
 
 class MinioSettings(BaseModel):
     endpoint: str
-    access_key: str
-    secret_key: str
+    root_user: str
+    root_password: str
     secure: bool
-    raw_bucket: str
+    bucket_name: str
+    raw_prefix: str
+    bronze_prefix: str
+    silver_prefix: str
+    gold_prefix: str
     log_bucket: str
+
 
 
 class Environment(BaseSettings):
@@ -44,24 +49,32 @@ class Environment(BaseSettings):
         extra="ignore",
     )
 
+    # APP
     APP_NAME: str
     APP_ENV: str
     APP_LOG_LEVEL: str
     APP_TIMEZONE: str
 
+    # LOGS
     LOG_DIRECTORY: Path
     LOG_MAX_SIZE_MB: int
     LOG_BACKUP_COUNT: int
 
+    # HTTP
     HTTP_TIMEOUT: int
     HTTP_MAX_RETRIES: int
     HTTP_USER_AGENT: str
 
+    # MINIO
     MINIO_ENDPOINT: str
-    MINIO_ACCESS_KEY: str
-    MINIO_SECRET_KEY: str
+    MINIO_ROOT_USER: str
+    MINIO_ROOT_PASSWORD: str
     MINIO_SECURE: bool
-    MINIO_RAW_BUCKET: str
+    MINIO_BUCKET_NAME: str
+    MINIO_RAW_PREFIX: str
+    MINIO_BRONZE_PREFIX: str
+    MINIO_SILVER_PREFIX: str
+    MINIO_GOLD_PREFIX: str
     MINIO_LOG_BUCKET: str
 
 
@@ -91,10 +104,14 @@ class Settings:
 
         self.minio = MinioSettings(
             endpoint=_env.MINIO_ENDPOINT,
-            access_key=_env.MINIO_ACCESS_KEY,
-            secret_key=_env.MINIO_SECRET_KEY,
+            root_user=_env.MINIO_ROOT_USER,
+            root_password=_env.MINIO_ROOT_PASSWORD,
             secure=_env.MINIO_SECURE,
-            raw_bucket=_env.MINIO_RAW_BUCKET,
+            bucket_name=_env.MINIO_BUCKET_NAME,
+            raw_prefix=_env.MINIO_RAW_PREFIX,
+            bronze_prefix=_env.MINIO_BRONZE_PREFIX,
+            silver_prefix=_env.MINIO_SILVER_PREFIX,
+            gold_prefix=_env.MINIO_GOLD_PREFIX,
             log_bucket=_env.MINIO_LOG_BUCKET,
         )
 
