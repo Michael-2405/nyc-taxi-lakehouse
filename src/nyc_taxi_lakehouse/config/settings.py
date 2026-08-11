@@ -6,6 +6,7 @@ import pendulum
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 class AppSettings(BaseModel):
     name: str
@@ -46,7 +47,7 @@ class MinioSettings(BaseModel):
 
 class Environment(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=PROJECT_ROOT / ".env",
         extra="ignore",
     )
 
