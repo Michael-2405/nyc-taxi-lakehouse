@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pendulum
@@ -7,6 +8,7 @@ from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+ENV_FILE_PATH = os.environ.get("ENV_FILE_PATH", str(PROJECT_ROOT / ".env"))
 
 class AppSettings(BaseModel):
     name: str
@@ -47,7 +49,7 @@ class MinioSettings(BaseModel):
 
 class Environment(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=PROJECT_ROOT / ".env",
+        env_file=ENV_FILE_PATH,
         extra="ignore",
     )
 

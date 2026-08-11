@@ -8,5 +8,5 @@ minio-data/
 data/
 airflow-logs/
 plugins/
-config/
+/config/
 .ipynb_checkpoints/

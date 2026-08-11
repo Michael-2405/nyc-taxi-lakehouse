@@ -1,0 +1,11 @@
+.venv/
+ data/
+ logs/
+ airflow-logs/
+ minio-data/
+ notebooks/
+ .git/
+ __pycache__/
+ *.pyc
+ .ipynb_checkpoints/
+/config/
