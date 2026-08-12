@@ -81,8 +81,6 @@ Diseñé cada capa para que sea **idempotente**: antes de procesar un dataset, v
 | Descarga HTTP | httpx |
 | Contenedores | Docker Compose |
 
-> **Nota sobre "procesamiento distribuido":** Spark corre aquí en modo local (`local[*]`), aprovechando los núcleos de una sola máquina, no un cluster multi-nodo. Uso la misma API y el mismo motor que usaría en un cluster real, pero quiero ser preciso: esto no es una prueba de escalado horizontal, es una demostración del modelo de procesamiento de Spark corriendo en mi laptop.
-
 ---
 
 ## Estructura del proyecto
